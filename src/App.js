@@ -1,12 +1,15 @@
 import React from "react";
+import Board from './components/Board.js';
 
 
 const App = () => {
     return (
-        <>
-            <p> Welcome to cro app </p>
-        </>
-    )
+
+        <div>
+            <p> TIC TAC TOE </p>
+            <Board />
+        </div>
+    );
 }
 
 
