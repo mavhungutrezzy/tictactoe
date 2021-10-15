@@ -6,40 +6,50 @@ import './styles/root.scss'
 
 const App = () => {
 
-	const [ board, setBoard ] = useState(Array(9).fill(null))
-	const [ nextPlayer, setNextPlayer ] = useState(false)
+	const [ history, setHistory ] = useState([ 
 
-	const winner = calculateWinner(board);
+		{board: Array(9).fill(null), nextPlayer: true } 
 
-	const message = winner ? `Winner is ${winner}` : `Next player is ${nextPlayer ? 'X' : 'O'}` 
+		]);
 
+	const [ currentMove, setCurrentMove ] = useState(0);
+	const current = history[currentMove];
+	// const [ nextPlayer, setNextPlayer ] = useState(false)
+
+	const winner = calculateWinner(current.board);
+	const message = winner ? `Winner is ${winner}` : `Next player is ${ current.nextPlayer ? 'X' : 'O'}` 
+	
 	const handleSquareClick = (position) => {
 
-		if( board[position] || winner ) return;
+		if( current.board[position] || winner ) return;
 		
-		setBoard((previous) => {
+		setHistory((previous) => {
 
-			return previous.map((square, pos) => {
+			const last = previous[previous.length - 1];
+
+			const newBoard = last.board.map((square, pos) => {
 				if(pos ===position) {
-					return nextPlayer ? 'X' : 'O';
+					return last.nextPlayer ? 'X' : 'O';
 				}
-
 				return square;
 			})
-			
+
+			return previous.concat({ board: newBoard, nextPlayer: !last.nextPlayer})
+
 		})
 
-		setNextPlayer((previous) => !previous);
-
+		setCurrentMove(previous => previous + 1)
 	};
 
 
     return (
 
         <div className="app">
+
             <h1> TIC TAC TOE </h1>
             <h2> { message } </h2>
-            <Board board={ board } handleSquareClick={ handleSquareClick } />
+            <Board board={ current.board } handleSquareClick={ handleSquareClick } />
+
         </div>
     );
 }

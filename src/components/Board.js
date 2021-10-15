@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import Square from './Square'
+import React, { useState } from 'react';
+import Square from './Square';
 
 
 
@@ -9,13 +9,14 @@ const Board = ({ board, handleSquareClick }) => {
 		return (
 
 			<Square value={board[position]} onClick={() => handleSquareClick(position)} />
-		)
+		);
 	};
 
 
 	return (
 
 		<div className="board">
+
 			<div className="board-row">
 
 				{ renderSquare(0) }
@@ -41,7 +42,6 @@ const Board = ({ board, handleSquareClick }) => {
 
 
 			</div>
-
 
 		</div>
 	);
