@@ -8,7 +8,7 @@ const App = () => {
     return (
 
         <div className="app">
-            <p> TIC TAC TOE </p>
+            <h1> TIC TAC TOE </h1>
             <Board />
         </div>
     );
