@@ -3,35 +3,11 @@ import Square from './Square'
 
 
 
-const Board = () => {
-
-	const [ board, setBoard ] = useState(Array(9).fill(null))
-	const [ nextPlayer, setNextPlayer ] = useState(false)
-
-	const handleSquareClick = (position) => {
-
-		if( board[position] ) return;
-		
-		setBoard((previous) => {
-
-			return previous.map((square, pos) => {
-				if(pos ===position) {
-					return nextPlayer ? 'X' : 'O';
-				}
-
-				return square;
-			})
-			
-		})
-
-		setNextPlayer((previous) => !previous);
-
-	};
-
-
+const Board = ({ board, handleSquareClick }) => {
 
 	const renderSquare = (position) => {
 		return (
+
 			<Square value={board[position]} onClick={() => handleSquareClick(position)} />
 		)
 	};
